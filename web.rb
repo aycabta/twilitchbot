@@ -2,12 +2,23 @@ require 'bundler'
 require 'sinatra'
 require 'slim'
 require 'twilio-ruby'
+require './model'
 
 configure do
   set :root, File.dirname(__FILE__)
   set :static, true
   set :public_folder, "#{File.dirname(__FILE__)}/public"
   enable :run
+end
+
+configure :production do
+  DataMapper.setup(:default, ENV['DATABASE_URL'])
+  database_upgrade!
+end
+
+configure :test, :development do
+  DataMapper.setup(:default, 'yaml:///tmp/twilitchbot')
+  database_upgrade!
 end
 
 get '/' do
