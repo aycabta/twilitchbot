@@ -3,6 +3,8 @@ gem 'sinatra'
 gem 'thin'
 gem 'slim'
 gem 'twilio-ruby'
+gem 'omniauth'
+gem 'omniauth-github'
 gem 'dm-core'
 gem 'dm-migrations'
 
