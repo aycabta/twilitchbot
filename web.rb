@@ -57,6 +57,34 @@ post '/receive_number' do
   end.to_xml
 end
 
+get '/user/set_ifttt' do
+  slim :set_ifttt
+end
+
+post '/user/set_ifttt' do
+  @errors = []
+  md = params[:url].match(%r{https://maker\.ifttt\.com/trigger/(.*)/with/key/(.+)})
+  if md
+    pp md[0]
+    pp md[1]
+    pp md[2]
+    if @me.ifttt
+      @me.ifttt.update(
+        access_key: md[1],
+        event_name: md[2])
+    else
+      ifttt = IFTTT.create(
+        access_key: md[1],
+        event_name: md[2])
+      @me.update(ifttt: ifttt)
+    end
+    redirect_to_top
+  else
+    @errors << 'URL is not valid'
+    slim :set_ifttt
+  end
+end
+
 get '/auth/:provider/callback' do
   auth = request.env['omniauth.auth']
   user = User.first(:user_id => auth[:uid].to_i)

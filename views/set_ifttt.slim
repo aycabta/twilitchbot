@@ -1,0 +1,9 @@
+- if @errors and not @errors.empty?
+  ul
+    - for e in @errors
+      li= e
+
+form action="/user/set_ifttt" method="POST"
+  input type="text" name="url" id="url" size="128" placeholder="https://maker.ifttt.com/trigger/{event_name}/with/key/{key}" value="#{@me.ifttt.nil? ? '' : @me.ifttt.url}"
+  br
+  input type="submit" value="Set"

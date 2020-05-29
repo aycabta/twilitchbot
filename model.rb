@@ -16,6 +16,10 @@ class IFTTT
   property :access_key, String, :length => 128, :required => true
   property :event_name, String, :length => 256, :required => true
   belongs_to :user
+
+  def url
+    "https://maker.ifttt.com/trigger/#{access_key}/with/key/#{event_name}"
+  end
 end
 
 class Delivery
