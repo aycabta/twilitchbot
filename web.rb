@@ -85,6 +85,19 @@ post '/user/set_ifttt' do
   end
 end
 
+post '/user/add_tracking_number' do
+  delivery = Delivery.create(tracking_number: params[:tracking_number])
+  @me.deliveries << delivery
+  @me.save
+  redirect_to_top
+end
+
+post '/user/delete_tracking_number' do
+  delivery = Delivery.first(params[:tracking_number])
+  delivery.destroy
+  redirect_to_top
+end
+
 get '/auth/:provider/callback' do
   auth = request.env['omniauth.auth']
   user = User.first(:user_id => auth[:uid].to_i)

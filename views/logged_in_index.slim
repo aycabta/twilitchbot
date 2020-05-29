@@ -1,5 +1,19 @@
 h2= "The list of #{@me.nickname}"
 
+ul
+  - for d in @me.deliveries
+    li
+      span= d.tracking_number
+      form action="/user/delete_tracking_number" method="POST"
+        input type="hidden" name="tracking_number" id="tracking_number" value="#{d.id}"
+        input type="submit" value="Del"
+
+hr
+
+form action="/user/add_tracking_number" method="POST"
+  input type="text" name="tracking_number" id="tracking_number" size="32" placeholder="tracking number"
+  input type="submit" value="Add"
+
 hr
 
 - if @me.ifttt
