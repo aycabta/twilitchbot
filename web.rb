@@ -121,4 +121,7 @@ before do
   if session[:logged_in]
     @me = User.first(:user_id => session[:user_id])
   end
+  if uri.path =~ %r{^/user/(\d+)} and @me.nil?
+    redirect_to_top
+  end
 end
