@@ -53,7 +53,13 @@ end
 
 post '/receive_number' do
   Twilio::TwiML::VoiceResponse.new do |r|
-    r.say(message: "入力された番号は、#{params[:Digits].split('').join('、')}、です。", language: 'ja-jp')
+    delivery = Delivery.first(tracking_number: params[:Digits])
+    if delivery
+      delivery.user.ifttt.punch
+      r.say(message: '追跡番号が確認できました。部屋番号を入力し、呼び出してください。', language: 'ja-jp')
+    else
+      r.say(message: '追跡番号が発見できませんでした。', language: 'ja-jp')
+    end
   end.to_xml
 end
 

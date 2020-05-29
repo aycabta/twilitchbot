@@ -1,5 +1,8 @@
 require 'dm-core'
 require 'dm-migrations'
+require 'net/http'
+require 'uri'
+require 'json'
 
 class User
   include DataMapper::Resource
@@ -19,6 +22,19 @@ class IFTTT
 
   def url
     "https://maker.ifttt.com/trigger/#{access_key}/with/key/#{event_name}"
+  end
+
+  def punch
+    uri = URI.parse(url)
+    https = Net::HTTP.new(uri.host, uri.port)
+    https.use_ssl = true
+    req = Net::HTTP::Post.new(uri.request_uri)
+    req['Content-Type'] = 'application/json'
+    res = https.request(req)
+    pp res
+    pp res.code
+    pp res.message
+    pp res.body
   end
 end
 
