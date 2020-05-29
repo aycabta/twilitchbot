@@ -1,6 +1,7 @@
 require 'bundler'
 require 'sinatra'
 require 'slim'
+require 'slim/include'
 require 'twilio-ruby'
 require 'omniauth'
 require 'omniauth-github'

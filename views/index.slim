@@ -1,7 +1,5 @@
 - if not @me.nil?
-  h2= "The list of #{@me.nickname}"
-  form action="/logout" method="POST"
-    input type="submit" value="logout"
+  include logged_in_index
 - else
   p
     a href="/auth/github" = "Log-in with GitHub"
