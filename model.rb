@@ -31,10 +31,6 @@ class IFTTT
     req = Net::HTTP::Post.new(uri.request_uri)
     req['Content-Type'] = 'application/json'
     res = https.request(req)
-    pp res
-    pp res.code
-    pp res.message
-    pp res.body
   end
 end
 

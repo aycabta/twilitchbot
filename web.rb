@@ -71,9 +71,6 @@ post '/user/set_ifttt' do
   @errors = []
   md = params[:url].match(%r{https://maker\.ifttt\.com/trigger/(.*)/with/key/(.+)})
   if md
-    pp md[0]
-    pp md[1]
-    pp md[2]
     if @me.ifttt
       @me.ifttt.update(
         access_key: md[1],
