@@ -46,7 +46,7 @@ post '/start' do
   Twilio::TwiML::VoiceResponse.new do |r|
     url = "#{ENV['HEROKU_URL']}/receive_number"
     r.gather timeout: 30, finishOnKey: '#', action: url, method: 'POST' do |g|
-      r.say(message: '置き配自動システムへようこそ。追跡番号を入力し、最後に、シャープを押してください。', language: 'ja-jp')
+      r.play(url: "#{ENV['HEROKU_URL']}/announcement.mp3")
     end
   end.to_xml
 end
@@ -61,9 +61,9 @@ post '/receive_number' do
           delivery.user.ifttt.punch
         end
       }
-      r.say(message: '追跡番号が確認できました。部屋番号を入力し、呼び出してください。', language: 'ja-jp')
+      r.play(url: "#{ENV['HEROKU_URL']}/correct.mp3")
     else
-      r.say(message: '追跡番号が確認できませんでした。', language: 'ja-jp')
+      r.play(url: "#{ENV['HEROKU_URL']}/error.mp3")
     end
   end.to_xml
 end
