@@ -6,6 +6,9 @@ html
     title TwilitchBot
     link rel="stylesheet" href="/main.css"
   body
-    h1 TwilitchBot
+    - if not @me.nil?
+      h1= "TwilitchBot with #{@me.nickname}"
+    - else
+      h1 TwilitchBot
     #content
       == yield
