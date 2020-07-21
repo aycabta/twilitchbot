@@ -3,7 +3,10 @@ html
   head
     meta charset="UTF-8"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    title TwilitchBot
+    - if not @me.nil?
+      title= "TwilitchBot with #{@me.nickname}"
+    - else
+      title TwilitchBot
     link rel="stylesheet" href="/main.css"
   body
     - if not @me.nil?
