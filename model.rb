@@ -2,7 +2,6 @@ require 'dm-core'
 require 'dm-migrations'
 require 'net/http'
 require 'uri'
-require 'json'
 
 class User
   include DataMapper::Resource
