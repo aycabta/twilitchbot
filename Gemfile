@@ -6,6 +6,7 @@ gem 'omniauth'
 gem 'omniauth-github', '~> 1.4.0'
 gem 'dm-core'
 gem 'dm-migrations'
+gem 'webrick'
 
 group :development, :test do
   gem 'dm-yaml-adapter'
