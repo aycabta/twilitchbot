@@ -101,7 +101,7 @@ post '/user/add_tracking_number' do
 end
 
 post '/user/delete_tracking_number' do
-  delivery = Delivery.first(params[:tracking_number])
+  delivery = Delivery.first(tracking_number: params[:tracking_number])
   delivery.destroy
   redirect_to_top
 end
